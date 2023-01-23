@@ -2,6 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import Header from '@/components/header'
 
+interface Briefcase {
+    caseNumber: number,
+    caseValue: number
+}
+
 const cases: number[] = [1, 5, 10, 25, 50, 75, 100, 200, 300, 400, 500, 750, 1000, 5000, 10000, 25000, 50000, 75000, 100000, 200000, 300000, 400000, 500000, 750000, 1000000]
 const caseNumber: number[] = Array.from({ length: cases.length }, (_, i) => i + 1)
 
@@ -11,6 +16,7 @@ const GamePage: React.FunctionComponent = () => {
     const [offer, setOffer] = useState<number | null>(null)
     const [gameOver, setGameOver] = useState<boolean>(false)
     const [clickedCases, setClickedCases] = useState<number[]>([])
+    const [chosenCase, setChosenCase] = useState<Briefcase | null>(null)
 
     const router = useRouter()
 
@@ -26,10 +32,15 @@ const GamePage: React.FunctionComponent = () => {
         return array;
     }
 
-    const selectCase = (caseNumber: number) => {
-        setSelectedCase(caseNumber)
-        setCasesLeft(casesLeft.filter(c => c !== caseNumber))
-        setClickedCases([...clickedCases, caseNumber])
+    const selectCase = (caseIndex: number, caseValue: number) => {
+        if (clickedCases.includes(caseValue)) return   
+        setSelectedCase(caseValue)
+        if (!chosenCase) setChosenCase(({caseNumber: caseIndex, caseValue: caseValue} as Briefcase))
+
+        if (chosenCase && chosenCase.caseNumber !== caseIndex) {
+            setClickedCases([...clickedCases, caseValue])
+            setCasesLeft(casesLeft.filter(c => c !== caseValue))
+        }
     }
 
     const makeOffer = () => {
@@ -42,25 +53,31 @@ const GamePage: React.FunctionComponent = () => {
 
     const acceptOffer = () => {
         setGameOver(true)
-        router.push("/game-over")
+        // router.push("/game-over")
     }
 
     return (
         <>
             <Header></Header>
             {gameOver ? (
-                <div>Game over!</div>
+                <div>You picked case {(chosenCase?.caseNumber ?? 0) + 1}, which was worth {chosenCase?.caseValue}</div>
             ) : (
                 <>
                     <div>Select a case to reveal its value:</div>
                     <div className="grid grid-cols-4 gap-4">
-                        {caseNumber.map((c, i) => (
+                        {caseNumber.map((c, i) => (                            
                             <button
-                                className={`bg-gray-200 py-3 px-6 rounded-lg text-lg ${selectedCase === cases[i] || clickedCases.includes(cases[i]) ? `text-red-500` : null}`}
-                                onClick={() => selectCase(cases[i])}
-                                disabled={clickedCases.includes(cases[i])}
+                                key={`case-${i}`}
+                                className={`bg-gray-200 py-3 px-6 rounded-lg text-lg 
+                                            ${ 
+                                                clickedCases.includes(cases[i]) ? `text-red-500` : 
+                                                chosenCase?.caseNumber === i ? `text-green-500` :
+                                                null
+                                            }`}
+                                onClick={() => selectCase(i, cases[i])}
+                                disabled={clickedCases.includes(cases[i]) || chosenCase?.caseNumber === i}
                             >
-                                {selectedCase === cases[i] || clickedCases.includes(cases[i]) ? cases[i] : c}
+                                {selectedCase === cases[i] || clickedCases.includes(cases[i]) ? cases[i] === chosenCase?.caseValue ? c : cases[i] : c}
                             </button>
                         ))}
                     </div>
@@ -68,6 +85,9 @@ const GamePage: React.FunctionComponent = () => {
                         {offer ? (
                             <div>
                                 <div className="text-4xl">Offer: {offer}</div>
+                                <div className="mt-4">
+                                    {chosenCase ? <div>Your chosen case: {chosenCase.caseNumber + 1}</div> : null}
+                                </div>
                                 <button className="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600" onClick={acceptOffer}>Accept Offer</button>
                                 <button className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600" onClick={makeOffer}>Make Offer</button>
                             </div>
