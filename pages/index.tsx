@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import Header from '@/components/header'
+import Head from 'next/head'
 
 interface Briefcase {
     caseNumber: number,
