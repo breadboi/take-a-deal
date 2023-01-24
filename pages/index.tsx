@@ -58,6 +58,12 @@ const GamePage: React.FunctionComponent = () => {
 
     return (
         <>
+            <Head>
+                <title>Take a Deal</title>
+                <meta name="description" content="A Free, Simple, and Open Source Deal or No Deal simulator." />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
             <Header></Header>
             {gameOver ? (
                 <div>You picked case {(chosenCase?.caseNumber ?? 0) + 1}, which was worth {chosenCase?.caseValue}</div>
