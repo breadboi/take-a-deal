@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import Header from '@/components/header'
 import Head from 'next/head'
+import Image from 'next/image'
+import briefcasePic from '../public/briefcase.png'
 
 interface Briefcase {
     caseNumber: number,
@@ -34,9 +36,9 @@ const GamePage: React.FunctionComponent = () => {
     }
 
     const selectCase = (caseIndex: number, caseValue: number) => {
-        if (clickedCases.includes(caseValue)) return   
+        if (clickedCases.includes(caseValue)) return
         setSelectedCase(caseValue)
-        if (!chosenCase) setChosenCase(({caseNumber: caseIndex, caseValue: caseValue} as Briefcase))
+        if (!chosenCase) setChosenCase(({ caseNumber: caseIndex, caseValue: caseValue } as Briefcase))
 
         if (chosenCase && chosenCase.caseNumber !== caseIndex) {
             setClickedCases([...clickedCases, caseValue])
@@ -70,22 +72,30 @@ const GamePage: React.FunctionComponent = () => {
                 <div>You picked case {(chosenCase?.caseNumber ?? 0) + 1}, which was worth {chosenCase?.caseValue}</div>
             ) : (
                 <>
-                    <div>Select a case to reveal its value:</div>
-                    <div className="grid grid-cols-4 gap-4">
-                        {caseNumber.map((c, i) => (                            
-                            <button
-                                key={`case-${i}`}
-                                className={`bg-gray-200 py-3 px-6 rounded-lg text-lg 
-                                            ${ 
-                                                clickedCases.includes(cases[i]) ? `text-red-500` : 
-                                                chosenCase?.caseNumber === i ? `text-green-500` :
+                    <h1 className='text-center text-2xl'>Select a case to reveal its value</h1>
+                    <div className="grid grid-cols-4 lg:grid-cols-6 xl:grid-cols-7">
+                        {caseNumber.map((c, i) => (
+                            <div key={i} className="relative">
+                                <button
+                                    className={`py-3 px-1 text-lg ease-in duration-200
+                                            ${clickedCases.includes(cases[i]) ? `text-red-600` :
+                                            chosenCase?.caseNumber === i ? `text-green-700` :
                                                 null
-                                            }`}
-                                onClick={() => selectCase(i, cases[i])}
-                                disabled={clickedCases.includes(cases[i]) || chosenCase?.caseNumber === i}
-                            >
-                                {selectedCase === cases[i] || clickedCases.includes(cases[i]) ? cases[i] === chosenCase?.caseValue ? c : cases[i] : c}
-                            </button>
+                                        }`}
+                                    onClick={() => selectCase(i, cases[i])}
+                                    disabled={clickedCases.includes(cases[i]) || chosenCase?.caseNumber === i}
+                                >
+                                    <Image
+                                        src={briefcasePic}
+                                        alt="Briefcase"
+                                        className="w-full h-full relative object-cover"
+                                    />
+                                    <div className="absolute inset-0 flex justify-center items-center z-10 p-4 xl:text-3xl font-bold">
+                                        {selectedCase === cases[i] || clickedCases.includes(cases[i]) ? cases[i] === chosenCase?.caseValue ? c : cases[i] : c}
+                                    </div>
+
+                                </button>
+                            </div>
                         ))}
                     </div>
                     <div className="flex justify-around">
