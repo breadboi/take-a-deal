@@ -89,9 +89,7 @@ const GamePage: React.FunctionComponent = () => {
                                         src={briefcasePic}
                                         alt="Briefcase"
                                         className="w-full h-full relative object-cover"
-                                        sizes="(max-width: 768px) 100vw,
-                                                (max-width: 1200px) 50vw,
-                                                33vw"
+                                        sizes="(min-width: 1280px) 14.3vw, (min-width: 1040px) calc(16.82vw - 10px), calc(25vw - 8px)"
                                         priority
                                     />
                                     <div className="absolute inset-0 flex justify-center items-center z-10 p-4 xl:text-3xl font-bold">
