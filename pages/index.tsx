@@ -89,6 +89,8 @@ const GamePage: React.FunctionComponent = () => {
                                         src={briefcasePic}
                                         alt="Briefcase"
                                         className="w-full h-full relative object-cover"
+                                        width={400}
+                                        priority
                                     />
                                     <div className="absolute inset-0 flex justify-center items-center z-10 p-4 xl:text-3xl font-bold">
                                         {selectedCase === cases[i] || clickedCases.includes(cases[i]) ? cases[i] === chosenCase?.caseValue ? c : cases[i] : c}
