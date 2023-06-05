@@ -1,38 +1,67 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Deal or No Deal Simulator
 
-## Getting Started
+## Description
 
-First, run the development server:
+This is a personal project that aims to simulate the popular game show "Deal or No Deal." Please note that this simulator is incomplete and does not perfectly replicate the entire gameplay experience of the show.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+In this simulator, the user starts by selecting a case, which will be highlighted in green to indicate it as their selected case. Subsequently, the user can continue selecting other cases, which will turn red and reveal their hidden values.
+
+At any point during the game, the user has the option to request a deal from the banker. If the user chooses this option, they will be provided with a deal from the banker. The user then has the choice to either accept the deal or refuse it.
+
+## Gameplay
+
+1. Launch the Deal or No Deal Simulator.
+
+2. You will be presented with a set of numbered cases, each containing a hidden value.
+
+3. Select one case as your chosen case. This case will be highlighted in green to indicate your selection.
+
+4. Start selecting other cases to open. Each time you select a case, it will turn red, revealing its hidden value.
+
+5. After opening a few cases, the banker will offer you a deal.
+
+6. You have the option to either take the deal or refuse it.
+
+7. If you accept the deal, the game ends and the deal value becomes your winnings.
+
+8. If you refuse the deal, the game continues with more cases being opened until the next deal is offered.
+
+## Technologies Used
+
+The Deal or No Deal Simulator is built using the following technologies:
+
+- [TypeScript](https://www.typescriptlang.org/): A programming language that adds static typing to JavaScript, providing better tooling and improved code quality.
+
+- [Next.js](https://nextjs.org/): A React framework that allows for server-side rendering, static site generation, and other powerful features to build modern web applications.
+
+- [Tailwind CSS](https://tailwindcss.com/): A utility-first CSS framework that provides a set of pre-defined classes to rapidly build responsive and visually appealing user interfaces.
+
+## Installation
+
+To run the Deal or No Deal Simulator, follow these steps:
+
+1. Clone the repository to your local machine or download the project files.
+
+2. Open the project in your preferred programming environment.
+
+3. Install the necessary dependencies by running the following command:
+
+```
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Start the development server by running the following command:
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```
+npm run dev
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+5. Open your web browser and visit `http://localhost:3000` to access the simulator.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Usage
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Upon running the simulator, follow the on-screen prompts and instructions to make your selections and interact with the game.
 
-## Learn More
+## Disclaimer
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Please note that this simulator is incomplete and does not perfectly replicate the entire gameplay experience of the "Deal or No Deal" game show. It serves as a personal project and may lack certain features or elements found in the original game.
